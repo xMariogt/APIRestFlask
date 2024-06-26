@@ -1,3 +1,4 @@
+from flask_jwt_extended import jwt_required
 from flask_restx import Resource
 from src.common.utils import db
 from src.models.nota_model import NotaModel
@@ -6,6 +7,7 @@ from flask import request
 from marshmallow import ValidationError
 
 class NotaController(Resource):
+    @jwt_required()
     def get(self):
         try:
             #Consulta a la base de datos
@@ -22,6 +24,7 @@ class NotaController(Resource):
 
 #Controlador POST
 class NotaControllerPost(Resource):
+    @jwt_required()
     def post(self):
         try:
             notasValidar = NotaSchemaValidar(exclude=["IDNOTA",])
@@ -43,6 +46,7 @@ class NotaControllerPost(Resource):
         
         
 class NotaControllerPut(Resource):
+    @jwt_required()
     def put(self):
         try:
             #Validar los datos
@@ -67,6 +71,7 @@ class NotaControllerPut(Resource):
         
         
 class NotaControllerDelete(Resource):
+    @jwt_required()
     def delete(self, idnota):
         try:
             
@@ -80,6 +85,7 @@ class NotaControllerDelete(Resource):
             return {"message": f"Algo salio mal, intenta de nuevo.\n{e}"}, 503
         
 class NotaControllerById(Resource):
+    @jwt_required()
     def get(self, idnota):
         try:
             notadb = db.session.execute(db.select(NotaModel).where(NotaModel.IDNOTA == idnota)).scalar_one()

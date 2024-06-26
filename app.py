@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restx import Api
 import os
-from src.common.utils import db, ma
+from src.common.utils import db, ma, jwt
 from src.routes.routes import Routes
 
 #Esta parte crea la app
@@ -23,6 +23,7 @@ api = Api(app, prefix="/api/v1")\
 #configuracion final de la db
 db.init_app(app)
 ma.init_app(app)
+jwt.init_app(app)
 
 #Importar las rutas
 Routes(api)

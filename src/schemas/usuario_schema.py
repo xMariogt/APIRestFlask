@@ -18,3 +18,7 @@ class UsuarioSchemaValidar(Schema):
     NOMBRE = fields.String(required=True)
     CORREO = fields.Email(required=True)
     CONTRASENIA = fields.String(required=True)
+    
+class UsuarioSchemaLogin(Schema):
+    CORREO = fields.Email(required=True)
+    CONTRASENIA = fields.String(required=True)
