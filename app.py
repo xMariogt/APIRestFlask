@@ -13,6 +13,8 @@ app = Flask(__name__)
 #Para que esto funcione si debo hacer el export de la Variable de entorno
 if os.environ["FLASK_ENV"] == 'development':
     app.config.from_object("settings.DeveloperConfig")
+elif os.environ["FLASK_ENV"] == 'testing':
+    app.config.from_object("settings.TestingConfig")
 else:
     app.config.from_object("settings.ProductionConfig")
 

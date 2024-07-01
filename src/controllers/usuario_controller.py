@@ -107,7 +107,7 @@ class UsuarioControllerLogin(Resource):
             usuario_schema = UsuarioSchema(exclude=["CONTRASENIA",]).dump(usuariodb)
             access_token = create_access_token(identity=usuario_schema, expires_delta=datetime.timedelta(days=1))
             
-            return access_token, 200
+            return {'token':access_token}, 200
         
         except NoResultFound as err:
             return {"message":"Correo o contrasenia equivocados."},404  
